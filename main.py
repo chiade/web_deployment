@@ -207,7 +207,6 @@ def add():
 
 
 @app.route('/edit-post/<int:post_id>', methods=['GET', 'POST'])
-@admin_only
 def edit(post_id):
     post = db.get_or_404(BlogPost, post_id)
     edit_form = CreatePostForm(
@@ -229,7 +228,7 @@ def edit(post_id):
     return render_template('blog_add.html', form=edit_form, is_edit=True, current_user=current_user)
 
 
-@app.route('/delete/<int:post_id>', methods=['DELETE'])
+@app.route('/delete/<int:post_id>')
 @admin_only
 def delete(post_id):
     post_to_delete = db.get_or_404(BlogPost, post_id)
